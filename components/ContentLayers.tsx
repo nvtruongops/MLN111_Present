@@ -1,8 +1,10 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import Image from 'next/image'
 
 type TopicCard = {
+
   id: number
   title: string
   short: string
@@ -244,72 +246,48 @@ export default function ContentLayers() {
   }
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        background: 'linear-gradient(170deg, #f5b13a 0%, #f18b2b 35%, #e6642f 100%)',
-        color: '#1a1a1a',
-        fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-        paddingTop: '100px',
-        paddingBottom: '80px',
-      }}
-    >
-      <div
-        style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: 0,
-          pointerEvents: 'none',
-          background: 'radial-gradient(ellipse at 20% 10%, rgba(255,255,255,0.38) 0%, transparent 55%)',
-        }}
-      />
+    <div className="min-h-screen bg-[#000000] text-neutral-300 font-sans selection:bg-blue-500/30 pb-32">
+      {/* ── Background Image & Gradients ──────────────────── */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-black">
+        <Image
+          src="/image/anhvutru1.png"
+          alt="Universe Spacial Background"
+          fill
+          className="object-cover object-center opacity-100"
+          quality={100}
+          sizes="100vw"
+          priority
+        />
+        {/* Lớp phủ Gradient mỏng để giữ ảnh sáng tối đa */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#000000]/80 z-0"></div>
+        
+        {/* Ánh sáng Gradient tạo điểm nhấn */}
+        <div className="absolute z-10 top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-blue-600/10 blur-[150px] rounded-full opacity-40" />
+        <div className="absolute z-10 top-[40%] left-[-10%] w-[500px] h-[500px] bg-amber-600/10 blur-[150px] rounded-full opacity-30" />
+      </div>
 
-      <div
-        className="mobile-page-wrapper"
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          width: 'min(1600px, calc(100vw - 10px))',
-          margin: '0 auto',
-          padding: '0',
-        }}
-      >
-        <div style={{ marginBottom: '56px', textAlign: 'center' }}>
-          <div
-            style={{
-              fontSize: '13px',
-              letterSpacing: '3px',
-              textTransform: 'uppercase',
-              color: 'rgba(0,0,0,0.6)',
-              marginBottom: '16px',
-              fontWeight: 700,
-            }}
-          >
-            Tài liệu mở rộng chủ đề
+      <div className="relative z-10 w-[min(1600px,calc(100vw-10px))] mx-auto px-6 pt-20 sm:pt-32">
+        {/* ── Header ───────────────────────────────── */}
+        <header className="mb-24 flex flex-col items-center text-center">
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 shadow-lg mb-6">
+            <span className="w-2 h-2 rounded-full bg-amber-400 mr-2 animate-pulse shadow-[0_0_8px_rgba(251,191,36,0.8)]"></span>
+            <p className="text-neutral-200 text-xs font-semibold tracking-widest uppercase">
+              Tài liệu mở rộng chủ đề
+            </p>
           </div>
-          <h1
-            className="mobile-page-title"
-            style={{
-              fontSize: '40px',
-              fontWeight: 800,
-              lineHeight: 1.3,
-              marginBottom: '24px',
-              color: '#102a43',
-              textShadow: '0 2px 10px rgba(16,42,67,0.18)',
-            }}
-          >
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-8 text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]">
             Phép biện chứng duy vật
           </h1>
-          <div style={{ width: '60px', height: '3px', background: '#102a43', margin: '0 auto', borderRadius: '2px' }} />
-        </div>
+          <p className="text-lg sm:text-xl text-white max-w-3xl leading-relaxed font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
+            Khám phá chiều sâu triết học với hệ thống kiến thức mở rộng, phân tích chi tiết các nguyên lý, 
+            quy luật cốt lõi tạo nên thế giới quan và phương pháp luận khoa học của chủ nghĩa Mác - Lênin.
+          </p>
+        </header>
 
+        {/* ── Topic Cards Grid ──────────────────────── */}
         <div
-          className="mobile-grid"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch"
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
-            gap: '18px',
-            alignItems: 'stretch',
             opacity: activeTopic ? 0.38 : 1,
             transform: activeTopic ? 'scale(0.99)' : 'scale(1)',
             transition: 'opacity 0.24s ease, transform 0.24s ease',
@@ -321,78 +299,53 @@ export default function ContentLayers() {
             return (
               <div
                 key={topic.id}
-                style={{
-                  background: '#fff8ea',
-                  borderRadius: '16px',
-                  padding: '14px',
-                  boxShadow: '0 10px 28px rgba(0,0,0,0.14)',
+                role="button"
+                tabIndex={0}
+                onClick={() => toggleTopic(topic.id)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    toggleTopic(topic.id)
+                  }
                 }}
+                className={`group relative rounded-3xl p-6 lg:p-8 flex flex-col min-h-[430px] cursor-pointer transition-all duration-500 overflow-hidden outline-none backdrop-blur-md ${
+                  isActive
+                    ? 'bg-[#0a0a0a]/80 border border-blue-500/50 shadow-[0_0_30px_rgba(59,130,246,0.15)]'
+                    : 'bg-[#050505]/60 border border-white/[0.05] hover:bg-[#0a0a0a]/80 hover:border-white/10'
+                }`}
               >
-                <div
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => toggleTopic(topic.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault()
-                      toggleTopic(topic.id)
-                    }
-                  }}
-                  style={{
-                    textAlign: 'left',
-                    borderRadius: '14px',
-                    border: isActive ? '2px solid #0d4f8b' : '1px solid rgba(13,79,139,0.25)',
-                    background: isActive ? '#e6f1fb' : '#ffffff',
-                    padding: '14px',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                    boxShadow: isActive ? '0 10px 24px rgba(13,79,139,0.15)' : 'none',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    minHeight: '430px',
-                    height: '100%',
-                    userSelect: 'none',
-                  }}
-                >
-                  <img
+                {/* Hover gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity mix-blend-overlay"></div>
+                
+                <div className="w-full h-52 relative rounded-2xl overflow-hidden mb-6 border border-white/5 bg-white/[0.03]">
+                  <Image
                     src={topic.heroImage}
                     alt={topic.title}
-                    style={{
-                      width: '100%',
-                      height: '128px',
-                      objectFit: 'contain',
-                      objectPosition: 'center',
-                      background: '#f3f5f7',
-                      borderRadius: '10px',
-                      marginBottom: '12px',
-                    }}
+                    fill
+                    className="object-contain object-center p-3 opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                   />
-                  <h3 style={{ fontSize: '20px', color: '#102a43', marginBottom: '8px', lineHeight: 1.35, fontWeight: 700 }}>{topic.title}</h3>
-                  <p style={{ fontSize: '15px', color: '#334e68', lineHeight: 1.6 }}>{topic.short}</p>
-                  <div
-                    style={{
-                      marginTop: '12px',
-                      fontSize: '13px',
-                      fontWeight: 600,
-                      color: isActive ? '#0d4f8b' : '#486581',
-                      letterSpacing: '0.3px',
-                    }}
-                  >
-                    {isActive ? 'Đang mở tab toàn vùng' : 'Bấm để mở tab chi tiết toàn màn hình'}
-                  </div>
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                </div>
+                
+                <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-400 group-hover:from-blue-200 group-hover:to-white transition-all duration-300 mb-3 tracking-tight leading-snug">{topic.title}</h3>
+                <p className="text-neutral-400 font-light leading-relaxed flex-1 group-hover:text-neutral-200 transition-colors duration-300">{topic.short}</p>
+                
+                <div className={`mt-6 text-sm font-medium tracking-wide uppercase flex items-center ${isActive ? 'text-blue-400' : 'text-neutral-500 group-hover:text-amber-400/80 transition-colors'}`}>
+                  {isActive ? 'Đang mở tab...' : 'Xem chi tiết →'}
                 </div>
               </div>
             )
           })}
         </div>
 
+        {/* ── Overlay Modal Backdrop ──────────────────── */}
         <div
           style={{
             position: 'fixed',
             inset: 0,
             zIndex: 50,
-            background: 'rgba(7, 17, 32, 0.42)',
-            backdropFilter: 'blur(3px)',
+            background: 'rgba(0, 0, 0, 0.6)',
+            backdropFilter: 'blur(8px)',
             pointerEvents: activeTopic ? 'auto' : 'none',
             opacity: activeTopic ? 1 : 0,
             transition: 'opacity 0.24s ease',
@@ -400,109 +353,66 @@ export default function ContentLayers() {
           onClick={() => setActiveId(null)}
         />
 
+        {/* ── Modal Content Window ────────────────────── */}
         <div
           style={{
             position: 'fixed',
-            top: '92px',
+            top: '72px',
             bottom: '24px',
-            left: '24px',
-            right: '24px',
+            left: 'min(24px, 2vw)',
+            right: 'min(24px, 2vw)',
             maxWidth: '1500px',
             margin: '0 auto',
-            borderRadius: '14px',
             zIndex: 55,
-            background: 'linear-gradient(180deg, #f7fbff 0%, #eef6ff 100%)',
-            border: '1px solid rgba(16,42,67,0.18)',
-            boxShadow: '0 20px 55px rgba(16,42,67,0.24)',
-            display: 'flex',
-            flexDirection: 'column',
-            overflow: 'hidden',
             pointerEvents: activeTopic ? 'auto' : 'none',
             opacity: activeTopic ? 1 : 0,
             transform: activeTopic ? 'translateX(0) scale(1)' : activeId ? getOverlayEnterTransform(activeId) : 'translateY(12px) scale(0.98)',
             transformOrigin: activeId ? getExpandOrigin(activeId) : 'center center',
             transition: 'opacity 0.26s ease, transform 0.36s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
+          className="rounded-3xl bg-[#080808]/95 backdrop-blur-2xl border border-white/10 shadow-2xl flex flex-col overflow-hidden"
         >
             {activeTopic && (
               <>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    gap: '10px',
-                    padding: '16px 20px',
-                    borderBottom: '1px solid rgba(16,42,67,0.14)',
-                    background: 'rgba(255,255,255,0.8)',
-                  }}
-                >
+                <div className="flex justify-between items-start gap-4 p-6 lg:p-8 border-b border-white/10 bg-white/5">
                   <div>
-                    <div style={{ fontSize: '12px', letterSpacing: '1.2px', textTransform: 'uppercase', color: '#486581', fontWeight: 700 }}>
+                    <div className="text-xs tracking-widest text-amber-400 uppercase font-semibold mb-2">
                       Chi tiết chuyên sâu
                     </div>
-                    <h3 style={{ fontSize: '24px', lineHeight: 1.3, color: '#102a43', marginTop: '4px', fontWeight: 800 }}>{activeTopic.title}</h3>
+                    <h3 className="text-3xl lg:text-4xl font-bold tracking-tight text-white">{activeTopic.title}</h3>
                   </div>
                   <button
                     type="button"
                     onClick={() => setActiveId(null)}
-                    style={{
-                      border: 'none',
-                      background: '#102a43',
-                      color: '#fff',
-                      borderRadius: '999px',
-                      padding: '8px 14px',
-                      fontSize: '13px',
-                      fontWeight: 700,
-                      cursor: 'pointer',
-                    }}
+                    className="flex-shrink-0 bg-white/10 hover:bg-white/20 text-white rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200 backdrop-blur-md"
                   >
-                    Đóng tab
+                    Đóng x
                   </button>
                 </div>
 
                 <div
-                  className="mobile-grid"
-                  style={{
-                    padding: '18px 20px 24px',
-                    overflowY: 'auto',
-                    display: 'grid',
-                    gridTemplateColumns: 'minmax(240px, 320px) minmax(0, 1fr)',
-                    gap: '18px',
-                    height: '100%',
-                  }}
+                  className="p-6 lg:p-10 overflow-y-auto grid grid-cols-1 lg:grid-cols-[380px_minmax(0,1fr)] gap-8 h-full"
                 >
-                  <div>
-                    <img
-                      src={activeTopic.fullImage || activeTopic.heroImage}
-                      alt={activeTopic.title}
-                      style={{
-                        width: '100%',
-                        height: '260px',
-                        borderRadius: '12px',
-                        objectFit: 'contain',
-                        objectPosition: 'center',
-                        background: '#f3f5f7',
-                        border: '1px solid rgba(16,42,67,0.12)',
-                      }}
-                    />
-                    <div style={{ marginTop: '12px', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  {/* Left Column - Image & Sources */}
+                  <div className="flex flex-col gap-6">
+                    <div className="relative w-full h-[280px] lg:h-[340px] rounded-2xl overflow-hidden border border-white/10 bg-black/50 shadow-inner">
+                      <Image
+                        src={activeTopic.fullImage || activeTopic.heroImage}
+                        alt={activeTopic.title}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-3">
                       {activeTopic.sourceUrl && (
                         <a
                           href={activeTopic.sourceUrl}
                           target="_blank"
                           rel="noreferrer"
-                          style={{
-                            padding: '8px 12px',
-                            borderRadius: '999px',
-                            textDecoration: 'none',
-                            background: '#102a43',
-                            color: '#fff',
-                            fontSize: '13px',
-                            fontWeight: 600,
-                          }}
+                          className="inline-flex justify-center items-center px-5 py-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-neutral-300 hover:text-white transition-all text-sm font-medium"
                         >
-                          Nguồn: {activeTopic.sourceLabel}
+                          <svg className="w-4 h-4 mr-2 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
+                          {activeTopic.sourceLabel}
                         </a>
                       )}
 
@@ -511,86 +421,60 @@ export default function ContentLayers() {
                           href={activeTopic.youtubeUrl}
                           target="_blank"
                           rel="noreferrer"
-                          style={{
-                            padding: '8px 12px',
-                            borderRadius: '999px',
-                            textDecoration: 'none',
-                            background: '#c62828',
-                            color: '#fff',
-                            fontSize: '13px',
-                            fontWeight: 600,
-                          }}
+                          className="inline-flex justify-center items-center px-5 py-3 rounded-2xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-100 transition-all text-sm font-medium"
                         >
+                          <svg className="w-5 h-5 mr-2 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
                           {activeTopic.youtubeLabel}
                         </a>
                       )}
                     </div>
                   </div>
 
-                  <div>
-                    <div
-                      style={{
-                        borderRadius: '12px',
-                        border: '1px solid rgba(13,79,139,0.14)',
-                        background: '#ffffff',
-                        padding: '14px 14px 6px',
-                        marginBottom: '12px',
-                      }}
-                    >
-                      {activeTopic.body.map((paragraph, idx) => (
-                        <p key={idx} style={{ fontSize: '15px', color: '#243b53', lineHeight: 1.7, marginBottom: '10px' }}>
-                          {paragraph}
-                        </p>
-                      ))}
+                  {/* Right Column - Content text */}
+                  <div className="flex flex-col gap-6">
+                    <div className="rounded-3xl border border-white/5 bg-white/[0.02] p-8 backdrop-blur-md">
+                      <div className="space-y-4">
+                        {activeTopic.body.map((paragraph, idx) => (
+                          <p key={idx} className="text-base text-neutral-300 font-light leading-relaxed">
+                            {paragraph}
+                          </p>
+                        ))}
+                      </div>
                     </div>
 
-                    <div className="mobile-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '12px' }}>
-                      <div
-                        style={{
-                          borderRadius: '12px',
-                          border: '1px solid rgba(13,79,139,0.14)',
-                          background: '#f4f9ff',
-                          padding: '12px',
-                        }}
-                      >
-                        <h4 style={{ fontSize: '15px', color: '#102a43', marginBottom: '8px', fontWeight: 700 }}>Ý chính trọng tâm</h4>
-                        <ul style={{ paddingLeft: '18px', color: '#334e68', lineHeight: 1.65, fontSize: '14px' }}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="rounded-3xl border border-blue-500/20 bg-blue-500/5 p-8 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 blur-[30px]" />
+                        <h4 className="text-lg text-blue-400 mb-4 font-semibold tracking-tight relative z-10 flex items-center">
+                          <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                          Ý chính trọng tâm
+                        </h4>
+                        <ul className="text-neutral-300 font-light leading-relaxed text-sm space-y-3 relative z-10 list-disc pl-4">
                           {activeTopic.keyPoints.map((point, idx) => (
-                            <li key={idx}>{point}</li>
+                            <li key={idx} className="pl-1">{point}</li>
                           ))}
                         </ul>
                       </div>
 
-                      <div
-                        style={{
-                          borderRadius: '12px',
-                          border: '1px solid rgba(13,79,139,0.14)',
-                          background: '#fff8ef',
-                          padding: '12px',
-                        }}
-                      >
-                        <h4 style={{ fontSize: '15px', color: '#102a43', marginBottom: '8px', fontWeight: 700 }}>Ví dụ minh họa</h4>
-                        <ul style={{ paddingLeft: '18px', color: '#334e68', lineHeight: 1.65, fontSize: '14px' }}>
+                      <div className="rounded-3xl border border-amber-500/20 bg-amber-500/5 p-8 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 blur-[30px]" />
+                        <h4 className="text-lg text-amber-400 mb-4 font-semibold tracking-tight relative z-10 flex items-center">
+                          <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                          Ví dụ minh họa
+                        </h4>
+                        <ul className="text-neutral-300 font-light leading-relaxed text-sm space-y-3 relative z-10 list-disc pl-4">
                           {(activeTopic.examples || []).map((example, idx) => (
-                            <li key={idx}>{example}</li>
+                            <li key={idx} className="pl-1">{example}</li>
                           ))}
                         </ul>
                       </div>
                     </div>
 
                     {activeTopic.note && (
-                      <div
-                        style={{
-                          marginTop: '12px',
-                          borderRadius: '10px',
-                          background: 'rgba(16,42,67,0.07)',
-                          color: '#243b53',
-                          fontSize: '14px',
-                          lineHeight: 1.6,
-                          padding: '10px 12px',
-                        }}
-                      >
-                        {activeTopic.note}
+                      <div className="mt-2 rounded-2xl border border-white/10 bg-white/5 p-5 flex items-start gap-4">
+                        <div className="text-sm font-light text-neutral-400 leading-relaxed italic border-l-2 border-amber-500/50 pl-4 py-1">
+                          {activeTopic.note}
+                        </div>
                       </div>
                     )}
                   </div>
@@ -602,3 +486,4 @@ export default function ContentLayers() {
     </div>
   )
 }
+
