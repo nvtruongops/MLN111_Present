@@ -17,7 +17,7 @@ export default function AboutPage() {
       {/* ── Background Image & Gradients ──────────────────── */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-black">
         <Image
-          src="/image/anhvutru.png"
+          src="/image/anhvutru.webp"
           alt="Universe Spacial Background"
           fill
           className="object-cover object-center opacity-100"
