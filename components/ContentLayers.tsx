@@ -304,34 +304,31 @@ export default function ContentLayers() {
         </div>
 
         <div
-          className="mobile-page-box"
+          className="mobile-grid"
           style={{
-            position: 'relative',
-            background: '#fff8ea',
-            borderRadius: '16px',
-            padding: '40px',
-            boxShadow: '0 10px 40px rgba(0,0,0,0.15)',
-            overflow: 'hidden',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+            gap: '18px',
+            alignItems: 'stretch',
+            opacity: activeTopic ? 0.38 : 1,
+            transform: activeTopic ? 'scale(0.99)' : 'scale(1)',
+            transition: 'opacity 0.24s ease, transform 0.24s ease',
+            pointerEvents: activeTopic ? 'none' : 'auto',
           }}
         >
-          <div
-            className="mobile-grid"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
-              gap: '18px',
-              alignItems: 'stretch',
-              opacity: activeTopic ? 0.38 : 1,
-              transform: activeTopic ? 'scale(0.985)' : 'scale(1)',
-              transition: 'opacity 0.24s ease, transform 0.24s ease',
-              pointerEvents: activeTopic ? 'none' : 'auto',
-            }}
-          >
-            {topics.map((topic) => {
-              const isActive = topic.id === activeId
-              return (
+          {topics.map((topic) => {
+            const isActive = topic.id === activeId
+            return (
+              <div
+                key={topic.id}
+                style={{
+                  background: '#fff8ea',
+                  borderRadius: '16px',
+                  padding: '14px',
+                  boxShadow: '0 10px 28px rgba(0,0,0,0.14)',
+                }}
+              >
                 <div
-                  key={topic.id}
                   role="button"
                   tabIndex={0}
                   onClick={() => toggleTopic(topic.id)}
@@ -343,7 +340,7 @@ export default function ContentLayers() {
                   }}
                   style={{
                     textAlign: 'left',
-                    borderRadius: '16px',
+                    borderRadius: '14px',
                     border: isActive ? '2px solid #0d4f8b' : '1px solid rgba(13,79,139,0.25)',
                     background: isActive ? '#e6f1fb' : '#ffffff',
                     padding: '14px',
@@ -384,29 +381,49 @@ export default function ContentLayers() {
                     {isActive ? 'Đang mở tab toàn vùng' : 'Bấm để mở tab chi tiết toàn màn hình'}
                   </div>
                 </div>
-              )
-            })}
-          </div>
+              </div>
+            )
+          })}
+        </div>
 
-          <div
-            style={{
-              position: 'absolute',
-              inset: '16px',
-              borderRadius: '14px',
-              zIndex: 5,
-              background: 'linear-gradient(180deg, #f7fbff 0%, #eef6ff 100%)',
-              border: '1px solid rgba(16,42,67,0.18)',
-              boxShadow: '0 20px 55px rgba(16,42,67,0.24)',
-              display: 'flex',
-              flexDirection: 'column',
-              overflow: 'hidden',
-              pointerEvents: activeTopic ? 'auto' : 'none',
-              opacity: activeTopic ? 1 : 0,
-              transform: activeTopic ? 'translateX(0) scale(1)' : activeId ? getOverlayEnterTransform(activeId) : 'translateY(12px) scale(0.98)',
-              transformOrigin: activeId ? getExpandOrigin(activeId) : 'center center',
-              transition: 'opacity 0.26s ease, transform 0.36s cubic-bezier(0.16, 1, 0.3, 1)',
-            }}
-          >
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 50,
+            background: 'rgba(7, 17, 32, 0.42)',
+            backdropFilter: 'blur(3px)',
+            pointerEvents: activeTopic ? 'auto' : 'none',
+            opacity: activeTopic ? 1 : 0,
+            transition: 'opacity 0.24s ease',
+          }}
+          onClick={() => setActiveId(null)}
+        />
+
+        <div
+          style={{
+            position: 'fixed',
+            top: '92px',
+            bottom: '24px',
+            left: '24px',
+            right: '24px',
+            maxWidth: '1500px',
+            margin: '0 auto',
+            borderRadius: '14px',
+            zIndex: 55,
+            background: 'linear-gradient(180deg, #f7fbff 0%, #eef6ff 100%)',
+            border: '1px solid rgba(16,42,67,0.18)',
+            boxShadow: '0 20px 55px rgba(16,42,67,0.24)',
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+            pointerEvents: activeTopic ? 'auto' : 'none',
+            opacity: activeTopic ? 1 : 0,
+            transform: activeTopic ? 'translateX(0) scale(1)' : activeId ? getOverlayEnterTransform(activeId) : 'translateY(12px) scale(0.98)',
+            transformOrigin: activeId ? getExpandOrigin(activeId) : 'center center',
+            transition: 'opacity 0.26s ease, transform 0.36s cubic-bezier(0.16, 1, 0.3, 1)',
+          }}
+        >
             {activeTopic && (
               <>
                 <div
@@ -581,7 +598,6 @@ export default function ContentLayers() {
               </>
             )}
           </div>
-        </div>
       </div>
     </div>
   )
