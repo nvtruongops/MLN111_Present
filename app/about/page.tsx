@@ -121,7 +121,7 @@ export default function AboutPage() {
               <span className="px-4 py-1.5 bg-[#12b24f]/20 border border-[#12b24f]/30 text-[#12b24f] rounded-full text-sm font-semibold tracking-wide">
                 MLN111
               </span>
-              <span className="text-sm text-neutral-500 font-medium">Spring 2024</span>
+              <span className="text-sm text-neutral-500 font-medium">Spring 2026</span>
               <span className="text-sm text-neutral-500 font-medium ml-auto">FPT University</span>
             </div>
           </div>
