@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -7,21 +8,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const TOTAL_FRAMES = 283
-
-// ─── Panel definitions ──────────────────────────────────────────
-// Each panel has: position (left/right/center), content, and scroll range
-// Total panels: 10, spread over 1200vh
-//
-//  Panel 0  (0.00–0.08)  CENTER  Intro — Chủ đề
-//  Panel 1  (0.08–0.18)  LEFT    State 1: Title
-//  Panel 2  (0.18–0.28)  RIGHT   State 1: Giải thích
-//  Panel 3  (0.28–0.38)  LEFT    State 2: Title
-//  Panel 4  (0.38–0.48)  RIGHT   State 2: Giải thích
-//  Panel 5  (0.48–0.58)  LEFT    State 2: Ví dụ
-//  Panel 6  (0.58–0.68)  LEFT    State 3: Title
-//  Panel 7  (0.68–0.78)  RIGHT   State 3: Giải thích
-//  Panel 8  (0.78–0.88)  LEFT    State 3: Tổng hợp
-//  Panel 9  (0.90–1.00)  CENTER  CTA
 
 interface PanelDef {
   position: 'left' | 'right' | 'center'
@@ -32,18 +18,26 @@ interface PanelDef {
 }
 
 const PANELS: PanelDef[] = [
-  { position: 'center', fadeIn: -0.01, full: 0.02, fadeOut: 0.06, gone: 0.09 },
-  { position: 'left',   fadeIn: 0.08,  full: 0.11, fadeOut: 0.16, gone: 0.19 }, // 1 Title
-  { position: 'right',  fadeIn: 0.18,  full: 0.21, fadeOut: 0.26, gone: 0.29 }, // 1 Giải thích
-  
-  { position: 'left',   fadeIn: 0.28,  full: 0.31, fadeOut: 0.36, gone: 0.39 }, // 2 Title
-  { position: 'right',  fadeIn: 0.38,  full: 0.41, fadeOut: 0.46, gone: 0.49 }, // 2 Giải thích
-  { position: 'left',   fadeIn: 0.48,  full: 0.51, fadeOut: 0.56, gone: 0.59 }, // 2 Ví dụ
-  
-  { position: 'left',   fadeIn: 0.58,  full: 0.61, fadeOut: 0.66, gone: 0.69 }, // 3 Title
-  { position: 'right',  fadeIn: 0.68,  full: 0.71, fadeOut: 0.76, gone: 0.79 }, // 3 Giải thích
-  { position: 'left',   fadeIn: 0.78,  full: 0.81, fadeOut: 0.86, gone: 0.89 }, // 3 Tổng hợp
-  { position: 'center', fadeIn: 0.90,  full: 0.93, fadeOut: 1.10, gone: 1.20 },
+  { position: 'center', fadeIn: -0.01, full: 0.02, fadeOut: 0.13, gone: 0.16 },
+
+  // 15% - 35%: Nguyen ly ve su phat trien
+  { position: 'left', fadeIn: 0.18, full: 0.20, fadeOut: 0.23, gone: 0.26 },
+  { position: 'right', fadeIn: 0.23, full: 0.25, fadeOut: 0.28, gone: 0.31 },
+  { position: 'left', fadeIn: 0.28, full: 0.30, fadeOut: 0.33, gone: 0.36 },
+
+  // 35% - 55%: Quy luat 1 + 2
+  { position: 'left', fadeIn: 0.36, full: 0.39, fadeOut: 0.44, gone: 0.47 },
+  { position: 'right', fadeIn: 0.46, full: 0.49, fadeOut: 0.54, gone: 0.57 },
+
+  // 55% - 75%: Quy luat 3
+  { position: 'left', fadeIn: 0.58, full: 0.61, fadeOut: 0.69, gone: 0.72 },
+
+  // 75% - 90%: Lien he thuc tien
+  { position: 'right', fadeIn: 0.76, full: 0.79, fadeOut: 0.87, gone: 0.90 },
+
+  // 90% - 100%: Ket luan + CTA
+  { position: 'center', fadeIn: 0.90, full: 0.93, fadeOut: 0.97, gone: 0.99 },
+  { position: 'center', fadeIn: 0.96, full: 0.98, fadeOut: 1.10, gone: 1.20 },
 ]
 
 export default function ImageSequence() {
@@ -305,8 +299,8 @@ export default function ImageSequence() {
               animation: 'spin 1s linear infinite',
               margin: '0 auto 24px',
             }} />
-            <div style={{ fontSize: '20px', color: 'rgba(255,255,255,0.8)', letterSpacing: '3px' }}>
-              {loadProgress}%
+            <div style={{ fontSize: '16px', color: 'rgba(255,255,255,0.8)', letterSpacing: '1px' }}>
+              Dang tai: {loadProgress}
             </div>
           </div>
         </div>
@@ -322,7 +316,6 @@ export default function ImageSequence() {
       <div ref={containerRef} style={{ position: 'relative', height: '1200vh' }}>
 
         {/* Gradient overlays for text readability */}
-        {/* Left gradient — for left-aligned panels */}
         <div className="desktop-gradient" style={{
           position: 'fixed', inset: 0, zIndex: 2,
           pointerEvents: 'none',
@@ -333,13 +326,10 @@ export default function ImageSequence() {
             rgba(0,0,0,0.1) 48%,
             transparent 55%
           )`,
-          opacity: (scrollProgress > 0.07 && scrollProgress < 0.30) ||
-                   (scrollProgress > 0.27 && scrollProgress < 0.60) ||
-                   (scrollProgress > 0.57 && scrollProgress < 0.90)
+          opacity: (scrollProgress > 0.16 && scrollProgress < 0.72)
                    ? 1 : 0,
           transition: 'opacity 0.6s ease',
         }} />
-        {/* Right gradient — for right-aligned panels */}
         <div className="desktop-gradient" style={{
           position: 'fixed', inset: 0, zIndex: 2,
           pointerEvents: 'none',
@@ -350,14 +340,12 @@ export default function ImageSequence() {
             rgba(0,0,0,0.1) 48%,
             transparent 55%
           )`,
-          opacity: (scrollProgress > 0.17 && scrollProgress < 0.30) ||
-                   (scrollProgress > 0.37 && scrollProgress < 0.50) ||
-                   (scrollProgress > 0.67 && scrollProgress < 0.80)
+          opacity: (scrollProgress > 0.22 && scrollProgress < 0.57) ||
+                   (scrollProgress > 0.74 && scrollProgress < 0.90)
                    ? 1 : 0,
           transition: 'opacity 0.6s ease',
         }} />
 
-        {/* Bottom gradient — strictly for mobile readability over bright sequences */}
         <div className="mobile-gradient" style={{
           position: 'fixed', inset: 0, zIndex: 2,
           pointerEvents: 'none',
@@ -369,15 +357,15 @@ export default function ImageSequence() {
             rgba(0,0,0,0.2) 45%,
             transparent 60%
           )`,
-          opacity: (scrollProgress > 0.07 && scrollProgress < 0.90) ? 1 : 0,
+          opacity: (scrollProgress > 0.12 && scrollProgress < 0.92) ? 1 : 0,
           transition: 'opacity 0.6s ease',
         }} />
-        {/* Center vignette — for intro & CTA */}
+
         <div style={{
           position: 'fixed', inset: 0, zIndex: 2,
           pointerEvents: 'none',
           background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.2) 50%, transparent 75%)',
-          opacity: scrollProgress < 0.09 || scrollProgress > 0.89 ? 1 : 0,
+          opacity: scrollProgress < 0.16 || scrollProgress > 0.89 ? 1 : 0,
           transition: 'opacity 0.6s ease',
         }} />
 
@@ -404,9 +392,7 @@ export default function ImageSequence() {
           </div>
         </div>
 
-        {/* ══════════════════════════════════════════════ */}
-        {/* PANEL 0 — INTRO (CENTER)                      */}
-        {/* ══════════════════════════════════════════════ */}
+        {/* PANEL 0 — HOOK */}
         {renderPanel(0, <>
           <div style={{
             fontSize: '13px', letterSpacing: '4px',
@@ -414,7 +400,7 @@ export default function ImageSequence() {
             color: 'rgba(255,255,255,0.7)',
             marginBottom: '24px',
           }}>
-            Triết học Mác — Lênin · Chương 2, Mục II
+            Mở đầu
           </div>
           <h1 style={{
             fontSize: '56px', fontWeight: 700,
@@ -445,8 +431,8 @@ export default function ImageSequence() {
             color: 'rgba(255,255,255,0.75)',
             fontWeight: 300,
           }}>
-            Cuộn xuống để khám phá ba quy luật cơ bản của phép biện chứng
-            thông qua hành trình tiến hóa của ánh sáng.
+            Từ thay đổi nhỏ nhất của đốm lửa đến bước nhảy công nghệ,
+            bạn đang nhìn thấy logic của sự phát triển trong thế giới vật chất.
           </p>
           <div style={{
             marginTop: '52px', fontSize: '13px', letterSpacing: '3px',
@@ -457,167 +443,133 @@ export default function ImageSequence() {
           </div>
         </>)}
 
-        {/* ══════════════════════════════════════════════ */}
-        {/* PANEL 1 — STATE 1 TITLE (LEFT)                */}
-        {/* ══════════════════════════════════════════════ */}
+        {/* PANEL 1 — NGUYEN LY (20%) */}
         {renderPanel(1, <>
-          <div style={labelStyle}>Phần 1</div>
+          <div style={labelStyle}>Nguyên lý về sự phát triển</div>
           <h2 style={titleStyle}>
-            Vận động<br />tự thân
+            Mọi sự vật luôn vận động
           </h2>
           <p style={subtitleStyle}>
-            Quy luật vận động tự thân của sự vật
+            Vận động và biến đổi là phương thức tồn tại của vật chất
           </p>
           <div style={dividerStyle} />
           <p style={bodyStyle}>
-            Đốm lửa nhỏ bập bùng trước mắt bạn chính là
-            hiện thân của nguyên lý nền tảng nhất trong
-            phép biện chứng: mọi sự vật, hiện tượng
-            đều luôn luôn vận động, biến đổi không ngừng.
+            Nội dung cốt lõi: không có sự vật nào đứng yên tuyệt đối.
+            Sự tồn tại của sự vật chính là quá trình tự biến đổi.
           </p>
         </>)}
 
-        {/* ══════════════════════════════════════════════ */}
-        {/* PANEL 2 — STATE 1 DETAIL (RIGHT)              */}
-        {/* ══════════════════════════════════════════════ */}
+        {/* PANEL 2 — NGUYEN LY (25%) */}
         {renderPanel(2, <>
-          <div style={labelStyle}>Vận động tự thân</div>
+          <div style={labelStyle}>Đặc điểm phát triển</div>
           <p style={bodyStyle}>
-            Theo triết học Mác — Lênin, vận động là phương thức
-            tồn tại của vật chất. Không có vật chất không vận động
-            và không có vận động ngoài vật chất.
+            Không có gì đứng yên tuyệt đối.
+            Càng quan sát sâu, bạn càng thấy mọi hệ thống
+            đều đang dao động, điều chỉnh và tái cấu trúc.
           </p>
           <p style={bodyDimStyle}>
-            Ngọn lửa tồn tại nhờ phản ứng hóa học liên tục
-            giữa nhiên liệu và oxy — nếu ngừng phản ứng,
-            lửa tắt, ngừng tồn tại.
+            Đặc điểm của sự phát triển:
+            khách quan, phổ biến và đa dạng (quanh co, không tuyến tính).
           </p>
           <div style={dividerStyle} />
           <p style={{ ...bodyDimStyle, fontStyle: 'italic', fontSize: '17px' }}>
-            &ldquo;Bạn không thể bước xuống cùng
-            một dòng sông hai lần.&rdquo;
+            &ldquo;Change is the only constant in life.&rdquo;
           </p>
           <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', letterSpacing: '2px', textTransform: 'uppercase' }}>
             — Heraclitus
           </p>
         </>)}
 
-        {/* ══════════════════════════════════════════════ */}
-        {/* PANEL 3 — STATE 2 TITLE (LEFT)                */}
-        {/* ══════════════════════════════════════════════ */}
+        {/* PANEL 3 — NGUYEN LY (30%) */}
         {renderPanel(3, <>
-          <div style={labelStyle}>Phần 2</div>
+          <div style={labelStyle}>Tính tất yếu</div>
           <h2 style={titleStyle}>
-            Lượng — Chất
+            Phát triển là tất yếu
           </h2>
           <p style={subtitleStyle}>
-            Quy luật chuyển hóa từ những thay đổi về lượng
-            thành những thay đổi về chất
+            Từ thấp đến cao, từ đơn giản đến phức tạp
           </p>
           <div style={dividerStyle} />
           <p style={bodyStyle}>
-            Đốm lửa không còn bập bùng ngẫu nhiên —
-            nó đang được nén lại, chế ngự, biến thành
-            dây tóc bóng đèn rực sáng.
+            Đây là phần nguyên lý bổ sung để đầy đủ đề:
+            sự phát triển không phụ thuộc ý chí chủ quan,
+            mà là quy luật khách quan của thế giới vật chất.
           </p>
         </>)}
 
-        {/* ══════════════════════════════════════════════ */}
-        {/* PANEL 4 — STATE 2 DETAIL (RIGHT)              */}
-        {/* ══════════════════════════════════════════════ */}
+        {/* PANEL 4 — QUY LUAT 1 */}
         {renderPanel(4, <>
-          <div style={labelStyle}>Lượng — Chất</div>
+          <div style={labelStyle}>Quy luật 1</div>
+          <h2 style={titleStyle}>
+            Thống nhất và đấu tranh
+            <br />của các mặt đối lập
+          </h2>
           <p style={bodyStyle}>
-            Mọi sự vật đều là sự thống nhất giữa lượng và chất.
-            Khi lượng thay đổi dần dần, tích lũy đến một giới hạn
-            nhất định — gọi là điểm nút — sẽ dẫn đến
-            sự thay đổi căn bản về chất.
+            Nội dung: các mặt đối lập tồn tại trong cùng một sự vật.
+            Vai trò: mâu thuẫn là nguồn gốc của sự phát triển.
           </p>
           <div style={dividerStyle} />
           <p style={bodyDimStyle}>
-            Đây chính là khoảnh khắc &ldquo;nhảy vọt về chất&rdquo;
-            mà phép biện chứng mô tả: một bước ngoặt
-            không thể đảo ngược.
+            &ldquo;Mâu thuẫn tạo ra thay đổi.&rdquo;
           </p>
         </>)}
 
-        {/* ══════════════════════════════════════════════ */}
-        {/* PANEL 5 — STATE 2 EXAMPLE (LEFT)              */}
-        {/* ══════════════════════════════════════════════ */}
+        {/* PANEL 5 — QUY LUAT 2 */}
         {renderPanel(5, <>
-          <div style={labelStyle}>Ví dụ minh họa</div>
+          <div style={labelStyle}>Quy luật 2</div>
+          <h2 style={titleStyle}>
+            Chuyển hóa từ lượng
+            <br />thành chất
+          </h2>
           <p style={bodyStyle}>
-            Loài người tích lũy hàng nghìn năm kinh nghiệm sử dụng lửa:
-            từ đuốc, nến, đèn dầu — đó là sự thay đổi về lượng.
+            Nội dung: lượng tích lũy dần, đạt ngưỡng sẽ biến đổi chất.
+            Vai trò: đây là cách thức của sự phát triển.
           </p>
           <p style={bodyDimStyle}>
-            Cho đến khi Thomas Edison phát minh bóng đèn sợi đốt
-            năm 1879, một bước nhảy vọt về chất đã xảy ra:
-            ánh sáng không còn phụ thuộc vào ngọn lửa trần nữa.
+            &ldquo;Tích lũy - bước nhảy.&rdquo;
           </p>
           <div style={dividerStyle} />
           <p style={{ ...bodyDimStyle, color: 'rgba(255,255,255,0.4)' }}>
-            Chất mới lại tạo nền tảng cho tích lũy về lượng mới,
-            mở ra kỷ nguyên công nghệ điện — chu kỳ lượng-chất
-            tiếp tục lặp lại ở trình độ cao hơn.
+            Từ dao động của đốm lửa đến bóng đèn dây tóc,
+            đó là quá trình thay đổi có tích lũy, không đột ngột.
           </p>
         </>)}
 
-        {/* ══════════════════════════════════════════════ */}
-        {/* PANEL 6 — STATE 3 TITLE (LEFT)                */}
-        {/* ══════════════════════════════════════════════ */}
+        {/* PANEL 6 — QUY LUAT 3 */}
         {renderPanel(6, <>
-          <div style={labelStyle}>Phần 3</div>
+          <div style={labelStyle}>Quy luật 3</div>
           <h2 style={titleStyle}>
-            Phủ định của<br />phủ định
+            Phủ định của phủ định
           </h2>
           <p style={subtitleStyle}>
-            Sự phát triển đi lên theo hình xoáy ốc
+            Khuynh hướng phát triển theo đường xoáy ốc
           </p>
           <div style={dividerStyle} />
           <p style={bodyStyle}>
-            Bóng đèn giờ đây bung tỏa thành những luồng dữ liệu,
-            mạch điện, quang phổ kỹ thuật số.
-            Ánh sáng không biến mất — nó được kế thừa
-            và nâng lên một trình độ hoàn toàn mới.
-          </p>
-        </>)}
-
-        {/* ══════════════════════════════════════════════ */}
-        {/* PANEL 7 — STATE 3 DETAIL (RIGHT)              */}
-        {/* ══════════════════════════════════════════════ */}
-        {renderPanel(7, <>
-          <div style={labelStyle}>Phủ định biện chứng</div>
-          <p style={bodyStyle}>
-            Sự phát triển không phải là đường thẳng,
-            cũng không phải vòng tròn lặp lại —
-            mà là đường xoáy ốc đi lên.
+            Nội dung: cái mới thay thế cái cũ,
+            nhưng kế thừa các yếu tố tích cực.
           </p>
           <p style={bodyDimStyle}>
-            Mỗi lần phủ định là một bước tiến:
-            cái mới ra đời trên cơ sở kế thừa
-            những yếu tố tích cực của cái cũ,
-            đồng thời loại bỏ những gì lỗi thời.
+            &ldquo;Thay đổi là liên tục, nhưng có kế thừa
+            để phát triển cao hơn.&rdquo;
           </p>
         </>)}
 
-        {/* ══════════════════════════════════════════════ */}
-        {/* PANEL 8 — STATE 3 SYNTHESIS (LEFT)            */}
-        {/* ══════════════════════════════════════════════ */}
-        {renderPanel(8, <>
-          <div style={labelStyle}>Tổng hợp</div>
+        {/* PANEL 7 — LIEN HE THUC TIEN */}
+        {renderPanel(7, <>
+          <div style={labelStyle}>Liên hệ thực tiễn</div>
+          <h2 style={titleStyle}>
+            Lý thuyết đi vào thực tế
+          </h2>
           <p style={bodyStyle}>
-            Lửa bị phủ định bởi bóng đèn.
-            Bóng đèn lại bị phủ định bởi công nghệ số.
-            Nhưng cáp quang ngày nay vẫn truyền tải ánh sáng —
-            bản chất của lửa được bảo tồn ở trình độ cao hơn.
+            AI thay đổi cách làm việc.
+            Cyber Security: Hacker ↔ Defense tạo động lực tiến bộ.
+            Xã hội luôn biến đổi, xu hướng mới liên tục xuất hiện.
           </p>
           <div style={dividerStyle} />
           <p style={{ ...bodyDimStyle, fontStyle: 'italic', fontSize: '17px' }}>
-            Con đường từ lửa đến dữ liệu quang học
-            minh chứng: sự thay đổi là hằng số duy nhất,
-            nhưng mỗi sự thay đổi đều mang theo
-            di sản của quá khứ.
+            Mâu thuẫn trong công nghệ và đời sống thực sự
+            đang vận hành đúng logic biện chứng.
           </p>
         </>)}
 
@@ -625,7 +577,7 @@ export default function ImageSequence() {
         <div style={{
           position: 'fixed', inset: 0, zIndex: 1,
           pointerEvents: 'none',
-          opacity: scrollProgress > 0.88 ? Math.min((scrollProgress - 0.88) / 0.04, 1) : 0,
+          opacity: scrollProgress > 0.89 ? Math.min((scrollProgress - 0.89) / 0.04, 1) : 0,
           transition: 'opacity 0.8s ease',
         }}>
           <img
@@ -643,39 +595,64 @@ export default function ImageSequence() {
           }} />
         </div>
 
-        {/* ══════════════════════════════════════════════ */}
-        {/* PANEL 9 — CTA (CENTER)                        */}
-        {/* ══════════════════════════════════════════════ */}
+        {/* PANEL 8 — KET LUAN */}
+        {renderPanel(8, <>
+          <div style={{
+            fontSize: '14px',
+            letterSpacing: '4px',
+            textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.7)',
+            marginBottom: '22px',
+          }}>
+            Kết luận
+          </div>
+          <h2 style={{ ...titleStyle, marginBottom: '24px', maxWidth: '860px' }}>
+            Thay đổi không chỉ là hiện tượng
+            <br />mà là quy luật của thế giới
+          </h2>
+          <p style={{ ...bodyDimStyle, fontSize: '17px', marginBottom: 0 }}>
+            Toàn bộ hành trình từ đốm lửa đến mạng dữ liệu cho thấy
+            sự phát triển là quy luật khách quan, phổ biến và đa tầng.
+          </p>
+        </>)}
+
+        {/* PANEL 9 — FINAL QUOTE + QUIZ CTA */}
         {renderPanel(9, <>
           <p style={{
-            fontSize: '34px', fontStyle: 'italic',
-            color: 'rgba(255,255,255,0.9)',
-            marginBottom: '12px', fontWeight: 300,
+            fontSize: '32px',
+            fontStyle: 'italic',
+            color: 'rgba(255,255,255,0.92)',
+            marginBottom: '10px',
+            fontWeight: 300,
             textShadow: '0 2px 30px rgba(0,0,0,0.6)',
             lineHeight: 1.4,
           }}>
             &ldquo;Change is the only constant in life&rdquo;
           </p>
           <p style={{
-            fontSize: '13px', letterSpacing: '4px',
-            textTransform: 'uppercase', fontWeight: 400,
-            color: 'rgba(255,255,255,0.3)', marginBottom: '40px',
+            fontSize: '13px',
+            letterSpacing: '4px',
+            textTransform: 'uppercase',
+            fontWeight: 400,
+            color: 'rgba(255,255,255,0.35)',
+            marginBottom: '32px',
           }}>
             — Heraclitus
           </p>
-          <p style={{ ...bodyDimStyle, fontSize: '15px', marginBottom: '44px' }}>
-            Ba quy luật của phép biện chứng duy vật giải thích
-            sự vận động của tự nhiên, xã hội và tư duy —
-            kim chỉ nam cho mọi biến đổi.
-          </p>
-          <button
+          <Link
+            href="/quiz"
             style={{
-              pointerEvents: 'auto', cursor: 'pointer',
+              pointerEvents: 'auto',
+              display: 'inline-block',
+              cursor: 'pointer',
               padding: '16px 52px',
-              fontSize: '15px', fontWeight: 600,
-              letterSpacing: '1px', color: '#000',
+              fontSize: '15px',
+              fontWeight: 600,
+              letterSpacing: '1px',
+              color: '#000',
               background: 'linear-gradient(135deg, #fff 0%, #e0e0e0 100%)',
-              border: 'none', borderRadius: '50px',
+              borderRadius: '50px',
+              textDecoration: 'none',
               boxShadow: '0 4px 30px rgba(255,255,255,0.2), 0 0 60px rgba(255,255,255,0.08)',
               transition: 'all 0.3s ease',
             }}
@@ -688,8 +665,8 @@ export default function ImageSequence() {
               e.currentTarget.style.boxShadow = '0 4px 30px rgba(255,255,255,0.2), 0 0 60px rgba(255,255,255,0.08)'
             }}
           >
-            Thử thách "Con đường Biện chứng"
-          </button>
+            Chuyển sang trang Quiz
+          </Link>
         </>)}
 
       </div>
