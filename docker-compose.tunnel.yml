@@ -1,0 +1,37 @@
+version: "3.9"
+
+# Stack don gian: App + Cloudflare Quick Tunnel
+# Khong can domain, khong can mo port, SSL tu dong
+# URL dang: https://xxxx-xxxx.trycloudflare.com
+
+services:
+  app:
+    image: ${APP_IMAGE:-mln111-present:latest}
+    container_name: mln111-app
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+    volumes:
+      - challenge_data:/app/data
+    networks:
+      - web
+
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    container_name: mln111-tunnel
+    restart: unless-stopped
+    depends_on:
+      - app
+    # Quick Tunnel: tu dong cap URL *.trycloudflare.com, khong can dang nhap
+    command: tunnel --no-autoupdate --url http://app:3000
+    networks:
+      - web
+
+volumes:
+  challenge_data:
+
+networks:
+  web:
+    driver: bridge

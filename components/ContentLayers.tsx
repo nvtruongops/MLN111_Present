@@ -43,26 +43,28 @@ const TOPICS: TopicCard[] = [
     sourceUrl:
       'https://thuvienphapluat.vn/phap-luat/ho-tro-phap-luat/phep-bien-chung-duy-vat-la-gi-vi-du-ve-phep-bien-chung-duy-vat-cu-the-vai-tro-cua-phep-bien-chung-d-409188-174876.html',
     body: [
-      'Phép biện chứng duy vật là bộ phận cơ bản của triết học Mác - Lênin, nghiên cứu mối liên hệ phổ biến và sự phát triển của mọi sự vật, hiện tượng trong tự nhiên, xã hội và tư duy.',
-      'Theo mạch nội dung từ Thư Viện Pháp Luật, phép biện chứng duy vật được hiểu như học thuyết về sự vận động, phát triển khách quan, đồng thời là công cụ phương pháp luận để nhận thức và cải tạo thực tiễn.',
-      'Nội dung trọng tâm: sự vật không tồn tại tách rời, mà luôn nằm trong hệ thống quan hệ qua lại; thay đổi xảy ra do mâu thuẫn nội tại và điều kiện cụ thể.',
-      'Hai nguyên lý nền tảng của phép biện chứng duy vật gồm: nguyên lý về mối liên hệ phổ biến và nguyên lý về sự phát triển.',
-      'Ba quy luật cơ bản gồm: lượng - chất, thống nhất và đấu tranh giữa các mặt đối lập, phủ định của phủ định.',
-      'Ý nghĩa phương pháp luận: tránh nhìn một chiều, tránh tuyệt đối hóa trạng thái hiện tại, biết dự báo xu hướng và lựa chọn cách tác động phù hợp theo hoàn cảnh cụ thể.',
+      'Phép biện chứng duy vật là một nhánh cốt lõi trong triết học Mác - Lênin, kết hợp giữa tư duy biện chứng và lập trường duy vật để lý giải sự vận động của thế giới khách quan.',
+      'Ph.Ăngghen xác định đây là "khoa học về sự liên hệ phổ biến" — tức là không sự vật nào tồn tại cô lập; mọi hiện tượng đều chịu tác động qua lại trong một hệ thống rộng lớn hơn.',
+      'V.I.Lênin bổ sung chiều cạnh nhận thức: phép biện chứng là học thuyết về sự phát triển dưới hình thức hoàn bị và sâu sắc nhất, phản ánh thế giới vật chất luôn biến đổi không ngừng.',
+      'Hai nguyên lý nền tảng: (1) mối liên hệ phổ biến — sự vật luôn tồn tại trong quan hệ tương tác; (2) sự phát triển — vận động đi từ thấp đến cao, từ đơn giản đến phức tạp theo quy luật khách quan.',
+      'Ba quy luật vận hành: chuyển hóa lượng - chất (tích lũy dẫn đến bước nhảy); thống nhất và đấu tranh của các mặt đối lập (mâu thuẫn là động lực); phủ định của phủ định (cái mới thay thế cái cũ nhưng có kế thừa).',
+      'Vai trò thực tiễn: là công cụ phương pháp luận giúp tránh tư duy phiến diện, biết đặt sự vật trong bối cảnh vận động và dự báo xu hướng thay vì chỉ nhìn trạng thái tức thời.',
+      'Trước khi chủ nghĩa duy vật phát triển, nhận thức con người bị chi phối nhiều bởi yếu tố tâm linh và siêu hình. Phép biện chứng duy vật đã đưa tư duy trở nên đa chiều và có cơ sở khoa học hơn.',
     ],
     keyPoints: [
-      'Khoa học về mối liên hệ phổ biến và sự phát triển.',
-      'Mọi sự vật vận động theo quy luật khách quan.',
-      'Mâu thuẫn nội tại là nguồn gốc vận động và phát triển.',
-      'Là thế giới quan và phương pháp luận khoa học.',
-      'Giúp giải quyết vấn đề thực tiễn theo tiến trình cụ thể.',
+      'Kết hợp biện chứng và duy vật — hai trụ cột của triết học Mác - Lênin.',
+      'Mọi sự vật đều liên hệ và vận động theo quy luật khách quan.',
+      'Mâu thuẫn nội tại là nguồn gốc của mọi sự phát triển.',
+      'Nhận thức phải bám theo tiến trình vận động, không cắt lát tại một thời điểm.',
+      'Là thế giới quan lẫn phương pháp luận — vừa giải thích vừa hướng dẫn hành động.',
+      'Giúp dự báo xu hướng và lựa chọn cách tác động phù hợp với từng hoàn cảnh.',
     ],
     examples: [
-      'Phủ định của phủ định: gà mái -> trứng -> gà con, cái mới xuất hiện qua chuỗi phủ định có kế thừa.',
-      'Lượng - chất: quãng đường di chuyển tích lũy dần về lượng, đến điểm đạt đích tạo chuyển biến trạng thái (chất).',
+      'Phủ định của phủ định: gà mái đẻ trứng (phủ định 1), trứng nở thành gà con (phủ định 2) — cái mới ra đời qua chuỗi phủ định có kế thừa, mang tính chu kỳ.',
+      'Lượng - chất: người đi xe máy 5km từ cơ quan về nhà — từng mét di chuyển là thay đổi về lượng, đến đích là bước chuyển về chất (hoàn thành hành trình).',
+      'Liên hệ phổ biến: một quyết định kinh doanh không thể đánh giá tách rời — phải xét trong bối cảnh thị trường, đối thủ, xu hướng xã hội và nguồn lực nội tại.',
     ],
-    note:
-      'Mục "Hai nguyên lý cơ bản & Ba quy luật" được tách riêng để trình bày chuyên sâu ở lớp thông tin 2 và 3.',
+    note: 'Nguyên lý và ba quy luật được trình bày chuyên sâu hơn ở tab 2 và tab 3.',
   },
   {
     id: 2,
@@ -71,7 +73,7 @@ const TOPICS: TopicCard[] = [
     heroImage: '/image/Nguyen_ly_ve_su_phat_trien.png',
     fullImage: '/image/Nguyen_ly_ve_su_phat_trien.png',
     sourceLabel: 'Transcript nội bộ dự án',
-    sourceFile: 'Nguyên Lý Về Sự Phát Triển - Triết Học Mác-Lê Nin.txt',
+    sourceFile: 'Nguyên Lý Về Sự Phát Triển',
     youtubeLabel: 'Nguồn video YouTube',
     youtubeUrl: 'https://youtu.be/JqgBTk93tNs?si=4d-AITylhiaibmiG',
     body: [
@@ -153,7 +155,7 @@ const CONTENT_FALLBACKS: Record<number, TopicFallbackConfig> = {
     keyPointsMin: 5,
     examplesMin: 3,
     sources: {
-      file: 'Nguyên Lý Về Sự Phát Triển - Triết Học Mác-Lê Nin.txt',
+      file: 'Nguyên Lý Về Sự Phát Triển',
       web: 'https://youtu.be/JqgBTk93tNs?si=4d-AITylhiaibmiG',
     },
     bodyFallback: [
@@ -173,7 +175,7 @@ const CONTENT_FALLBACKS: Record<number, TopicFallbackConfig> = {
     keyPointsMin: 5,
     examplesMin: 3,
     sources: {
-      file: 'Các quy luật của phép biện chứng duy vật.txt',
+      file: 'Các quy luật của phép biện chứng duy vật',
       web: 'https://youtu.be/m7t09vC-VaM?si=nfkX39hD2QMkH1M8',
     },
     bodyFallback: [
@@ -321,64 +323,58 @@ export default function ContentLayers() {
             return (
               <div
                 key={topic.id}
+                role="button"
+                tabIndex={0}
+                onClick={() => toggleTopic(topic.id)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    toggleTopic(topic.id)
+                  }
+                }}
                 style={{
-                  background: '#fff8ea',
-                  borderRadius: '16px',
-                  padding: '14px',
-                  boxShadow: '0 10px 28px rgba(0,0,0,0.14)',
+                  textAlign: 'left',
+                  borderRadius: '0px',
+                  background: isActive ? 'rgba(255,255,255,0.98)' : 'rgba(255,255,255,0.82)',
+                  padding: '0',
+                  cursor: 'pointer',
+                  transition: 'all 0.25s ease',
+                  boxShadow: isActive
+                    ? '0 16px 48px rgba(16,42,67,0.22), 0 2px 8px rgba(16,42,67,0.1)'
+                    : '0 6px 24px rgba(16,42,67,0.10)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  overflow: 'hidden',
+                  userSelect: 'none',
+                  transform: isActive ? 'translateY(-4px)' : 'translateY(0)',
                 }}
               >
-                <div
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => toggleTopic(topic.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault()
-                      toggleTopic(topic.id)
-                    }
-                  }}
+                <img
+                  src={topic.heroImage}
+                  alt={topic.title}
                   style={{
-                    textAlign: 'left',
-                    borderRadius: '14px',
-                    border: isActive ? '2px solid #0d4f8b' : '1px solid rgba(13,79,139,0.25)',
-                    background: isActive ? '#e6f1fb' : '#ffffff',
-                    padding: '14px',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                    boxShadow: isActive ? '0 10px 24px rgba(13,79,139,0.15)' : 'none',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    minHeight: '430px',
-                    height: '100%',
-                    userSelect: 'none',
+                    width: '100%',
+                    height: 'auto',
+                    objectFit: 'contain',
+                    objectPosition: 'center',
+                    display: 'block',
                   }}
-                >
-                  <img
-                    src={topic.heroImage}
-                    alt={topic.title}
-                    style={{
-                      width: '100%',
-                      height: '128px',
-                      objectFit: 'contain',
-                      objectPosition: 'center',
-                      background: '#f3f5f7',
-                      borderRadius: '10px',
-                      marginBottom: '12px',
-                    }}
-                  />
+                />
+                <div style={{ padding: '20px 22px 24px' }}>
                   <h3 style={{ fontSize: '20px', color: '#102a43', marginBottom: '8px', lineHeight: 1.35, fontWeight: 700 }}>{topic.title}</h3>
-                  <p style={{ fontSize: '15px', color: '#334e68', lineHeight: 1.6 }}>{topic.short}</p>
+                  <p style={{ fontSize: '15px', color: '#486581', lineHeight: 1.6, marginBottom: '16px' }}>{topic.short}</p>
                   <div
                     style={{
-                      marginTop: '12px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
                       fontSize: '13px',
-                      fontWeight: 600,
-                      color: isActive ? '#0d4f8b' : '#486581',
+                      fontWeight: 700,
+                      color: isActive ? '#0d4f8b' : '#102a43',
                       letterSpacing: '0.3px',
                     }}
                   >
-                    {isActive ? 'Đang mở tab toàn vùng' : 'Bấm để mở tab chi tiết toàn màn hình'}
+                    {isActive ? '✓ Đang xem' : 'Xem chi tiết →'}
                   </div>
                 </div>
               </div>

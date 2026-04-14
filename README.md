@@ -43,3 +43,16 @@ Mở [http://localhost:3000](http://localhost:3000) để xem kết quả.
 npm run build
 npm start
 ```
+
+## Deploy Docker Production (Windows Server)
+
+Quick start:
+
+```powershell
+Copy-Item .env.prod.example .env.prod
+# Sua DOMAIN va APP_IMAGE trong .env.prod
+docker compose --env-file .env.prod -f docker-compose.prod.yml pull
+docker compose --env-file .env.prod -f docker-compose.prod.yml up -d
+```
+
+Tai lieu day du: `docs/DEPLOY_DOCKER_WINDOWS.md`

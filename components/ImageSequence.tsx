@@ -300,7 +300,7 @@ export default function ImageSequence() {
               margin: '0 auto 24px',
             }} />
             <div style={{ fontSize: '16px', color: 'rgba(255,255,255,0.8)', letterSpacing: '1px' }}>
-              Dang tai: {loadProgress}
+              Đang tải: {loadProgress}
             </div>
           </div>
         </div>
@@ -639,34 +639,65 @@ export default function ImageSequence() {
           }}>
             — Heraclitus
           </p>
-          <Link
-            href="/quiz"
-            style={{
-              pointerEvents: 'auto',
-              display: 'inline-block',
-              cursor: 'pointer',
-              padding: '16px 52px',
-              fontSize: '15px',
-              fontWeight: 600,
-              letterSpacing: '1px',
-              color: '#000',
-              background: 'linear-gradient(135deg, #fff 0%, #e0e0e0 100%)',
-              borderRadius: '50px',
-              textDecoration: 'none',
-              boxShadow: '0 4px 30px rgba(255,255,255,0.2), 0 0 60px rgba(255,255,255,0.08)',
-              transition: 'all 0.3s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'scale(1.05)'
-              e.currentTarget.style.boxShadow = '0 6px 40px rgba(255,255,255,0.35), 0 0 80px rgba(255,255,255,0.15)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'scale(1)'
-              e.currentTarget.style.boxShadow = '0 4px 30px rgba(255,255,255,0.2), 0 0 60px rgba(255,255,255,0.08)'
-            }}
-          >
-            Chuyển sang trang Quiz
-          </Link>
+          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center', pointerEvents: 'auto' }}>
+            <Link
+              href="/challenge"
+              style={{
+                display: 'inline-block',
+                cursor: 'pointer',
+                padding: '16px 52px',
+                fontSize: '15px',
+                fontWeight: 600,
+                letterSpacing: '1px',
+                color: '#000',
+                background: 'linear-gradient(135deg, #fff 0%, #e0e0e0 100%)',
+                borderRadius: '50px',
+                textDecoration: 'none',
+                boxShadow: '0 4px 30px rgba(255,255,255,0.2), 0 0 60px rgba(255,255,255,0.08)',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.05)'
+                e.currentTarget.style.boxShadow = '0 6px 40px rgba(255,255,255,0.35), 0 0 80px rgba(255,255,255,0.15)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)'
+                e.currentTarget.style.boxShadow = '0 4px 30px rgba(255,255,255,0.2), 0 0 60px rgba(255,255,255,0.08)'
+              }}
+            >
+              Bắt đầu thử thách !
+            </Link>
+            <Link
+              href="/content"
+              style={{
+                display: 'inline-block',
+                cursor: 'pointer',
+                padding: '16px 52px',
+                fontSize: '15px',
+                fontWeight: 600,
+                letterSpacing: '1px',
+                color: '#fff',
+                background: 'transparent',
+                borderRadius: '50px',
+                textDecoration: 'none',
+                border: '1.5px solid rgba(255,255,255,0.4)',
+                boxShadow: '0 4px 30px rgba(255,255,255,0.05)',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.05)'
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'
+                e.currentTarget.style.boxShadow = '0 6px 40px rgba(255,255,255,0.15)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)'
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)'
+                e.currentTarget.style.boxShadow = '0 4px 30px rgba(255,255,255,0.05)'
+              }}
+            >
+              Tìm hiểu thêm
+            </Link>
+          </div>
         </>)}
 
       </div>
