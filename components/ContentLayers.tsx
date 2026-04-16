@@ -38,7 +38,7 @@ const TOPICS: TopicCard[] = [
   {
     id: 1,
     title: 'Phép biện chứng duy vật là gì?',
-    short: 'Ví dụ và vai trò cụ thể từ nguồn Thư Viện Pháp Luật.',
+    short: '',
     heroImage: '/image/phep-bien-chung.jpg',
     fullImage: '/image/phep-bien-chung.jpg',
     sourceLabel: 'Thư Viện Pháp Luật',
@@ -69,7 +69,7 @@ const TOPICS: TopicCard[] = [
   {
     id: 2,
     title: 'Nguyên lý về sự phát triển',
-    short: 'Nội dung chuyên sâu từ transcript học tập và video YouTube.',
+    short: '',
     heroImage: '/image/Nguyen_ly_ve_su_phat_trien.png',
     fullImage: '/image/Nguyen_ly_ve_su_phat_trien.png',
     sourceLabel: 'Transcript nội bộ dự án',
@@ -100,7 +100,7 @@ const TOPICS: TopicCard[] = [
   {
     id: 3,
     title: 'Ba quy luật cơ bản',
-    short: 'Hệ thống hóa quy luật từ transcript và nguồn video minh họa.',
+    short: '',
     heroImage: '/image/Ba_quy_luat.png',
     fullImage: '/image/Ba_quy_luat.png',
     sourceLabel: 'Transcript nội bộ dự án',
@@ -126,6 +126,35 @@ const TOPICS: TopicCard[] = [
       'Lượng - chất: học từng ngày tích lũy lượng tri thức, đến ngưỡng sẽ tạo bước nhảy về năng lực giải quyết vấn đề.',
       'Mâu thuẫn: cạnh tranh và khác biệt trong tổ chức nếu xử lý đúng sẽ trở thành động lực đổi mới.',
       'Phủ định của phủ định: mô hình cũ được thay thế bởi mô hình mới nhưng vẫn kế thừa hạt nhân hợp lý.',
+    ],
+  },
+  {
+    id: 4,
+    title: 'Phân tích "Change is the only constant in life"',
+    short: '',
+    heroImage: '/image/cau_noi.jpg',
+    fullImage: '/image/cau_noi.jpg',
+    sourceLabel: 'Nguồn tham khảo',
+    body: [
+      'Như triết gia Hy Lạp Heraclitus đã nói cách đây khoảng 2500 năm: "Không có gì là vĩnh cửu ngoại trừ sự thay đổi". Mặc dù câu nói này được thốt ra từ hàng trăm thế kỷ trước, nhưng nó vẫn là chân lý đúng đắn cho đến ngày nay.',
+      'Câu nói này chứa đựng những bài học sâu sắc có thể thúc đẩy chúng ta chấp nhận hiện thực như nó vốn có. Mọi thứ đều thay đổi theo thời gian, và thay đổi là điều duy nhất không đổi.',
+      'Đón nhận sự thay đổi: Chấp nhận sự thay đổi có thể khó khăn, nhưng nó cho phép chúng ta buông bỏ quá khứ, tha thứ cho bản thân và tiến về phía trước. Nó mở ra những cơ hội tốt hơn và tạo điều kiện cho sự phát triển cá nhân.',
+      'Học cách buông bỏ: Chúng ta thường bám víu vào niềm vui và hạnh phúc mà không nhận ra rằng chúng cũng chỉ là tạm thời. Khi đối mặt với bi kịch, việc học cách buông bỏ giúp chúng ta vượt qua khó khăn dễ dàng hơn.',
+      'Vấn đề cũng chỉ là tạm thời: Vì không có gì là vĩnh cửu, nên những vấn đề của chúng ta cũng không phải ngoại lệ. Khi đau khổ, hãy nhớ rằng mọi chuyện sẽ thay đổi theo thời gian.',
+      'Như Steve Jobs đã nói: "Thời gian của bạn có hạn, vì vậy đừng lãng phí nó bằng cách sống cuộc đời của người khác. Hãy can đảm để làm theo trái tim và trực giác của mình."',
+    ],
+    keyPoints: [
+      'Sự thay đổi là điều duy nhất không đổi trong cuộc sống.',
+      'Đón nhận thay đổi để phát triển và tiến bộ.',
+      'Học cách buông bỏ những gì tạm thời.',
+      'Vấn đề không phải là vĩnh viễn, chúng sẽ qua đi.',
+      'Thời gian có hạn, hãy sống theo cách của riêng bạn.',
+    ],
+    examples: [
+      'Thay đổi thói quen làm việc cũ để cải thiện hiệu suất.',
+      'Chấp nhận mất mát và tiến về phía trước với tâm thế mới.',
+      'Đối mặt với khó khăn với niềm tin rằng mọi thứ sẽ tốt đẹp hơn.',
+      'Dám thử nghiệm điều mới thay vì ở mãi trong vùng an toàn.',
     ],
   },
 ]
@@ -226,24 +255,7 @@ const enrichTopicIfNeeded = (topic: TopicCard): TopicCard => {
 
 export default function ContentLayers() {
   const topics = useMemo(() => TOPICS.map(enrichTopicIfNeeded), [])
-  const [activeId, setActiveId] = useState<number | null>(null)
-  const activeTopic = topics.find((topic) => topic.id === activeId) || null
-
-  const getExpandOrigin = (id: number): 'left center' | 'center center' | 'right center' => {
-    if (id === 1) return 'left center'
-    if (id === 2) return 'center center'
-    return 'right center'
-  }
-
-  const toggleTopic = (id: number) => {
-    setActiveId((prev) => (prev === id ? null : id))
-  }
-
-  const getOverlayEnterTransform = (id: number) => {
-    if (id === 1) return 'translateX(-12%) scale(0.98)'
-    if (id === 2) return 'translateX(0) scale(0.98)'
-    return 'translateX(12%) scale(0.98)'
-  }
+  const romanNumerals = ['I', 'II', 'III', 'IV']
 
   return (
     <div className="min-h-screen bg-[#000000] text-neutral-300 font-sans selection:bg-blue-500/30 pb-32">
@@ -258,230 +270,130 @@ export default function ContentLayers() {
           sizes="100vw"
           priority
         />
-        {/* Lớp phủ Gradient mỏng để giữ ảnh sáng tối đa */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#000000]/80 z-0"></div>
-        
-        {/* Ánh sáng Gradient tạo điểm nhấn */}
         <div className="absolute z-10 top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-blue-600/10 blur-[150px] rounded-full opacity-40" />
         <div className="absolute z-10 top-[40%] left-[-10%] w-[500px] h-[500px] bg-amber-600/10 blur-[150px] rounded-full opacity-30" />
       </div>
 
-      <div className="relative z-10 w-[min(1600px,calc(100vw-10px))] mx-auto px-6 pt-20 sm:pt-32">
-        {/* ── Header ───────────────────────────────── */}
-        <header className="mb-24 flex flex-col items-center text-center">
-          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 shadow-lg mb-6">
-            <span className="w-2 h-2 rounded-full bg-amber-400 mr-2 animate-pulse shadow-[0_0_8px_rgba(251,191,36,0.8)]"></span>
-            <p className="text-neutral-200 text-xs font-semibold tracking-widest uppercase">
-              Tài liệu mở rộng chủ đề
-            </p>
+      <div className="relative z-10 w-full mx-auto px-4 sm:px-6 pt-20 sm:pt-32">
+        {/* ── Single Unified Block ──────────────────────── */}
+        <article className="max-w-7xl mx-auto rounded-3xl border border-white/10 bg-[#050505]/80 backdrop-blur-xl shadow-2xl overflow-hidden">
+          {/* ── Đề bài Header Inside Block ──────────────────────── */}
+          <div className="relative px-6 sm:px-10 lg:px-16 pt-12 pb-16 border-b border-white/10">
+            <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 via-transparent to-transparent pointer-events-none"></div>
+            <div className="relative z-10 text-center space-y-4">
+              <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-amber-500/10 backdrop-blur-md border border-amber-500/20 shadow-lg mb-4">
+                <span className="w-2 h-2 rounded-full bg-amber-400 mr-2 animate-pulse shadow-[0_0_8px_rgba(251,191,36,0.8)]"></span>
+                <p className="text-amber-200 text-xs font-semibold tracking-widest uppercase">
+                  Tài liệu mở rộng chủ đề
+                </p>
+              </div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight text-white">
+                Phép biện chứng duy vật
+              </h1>
+              <p className="text-base sm:text-lg text-neutral-300 max-w-3xl mx-auto leading-relaxed">
+                Khám phá chiều sâu triết học với hệ thống kiến thức mở rộng, phân tích chi tiết các nguyên lý, 
+                quy luật cốt lõi tạo nên thế giới quan và phương pháp luận khoa học của chủ nghĩa Mác - Lênin.
+              </p>
+            </div>
           </div>
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-8 text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]">
-            Phép biện chứng duy vật
-          </h1>
-          <p className="text-lg sm:text-xl text-white max-w-3xl leading-relaxed font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
-            Khám phá chiều sâu triết học với hệ thống kiến thức mở rộng, phân tích chi tiết các nguyên lý, 
-            quy luật cốt lõi tạo nên thế giới quan và phương pháp luận khoa học của chủ nghĩa Mác - Lênin.
-          </p>
-        </header>
 
-        {/* ── Topic Cards Grid ──────────────────────── */}
-        <div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch"
-          style={{
-            opacity: activeTopic ? 0.38 : 1,
-            transform: activeTopic ? 'scale(0.99)' : 'scale(1)',
-            transition: 'opacity 0.24s ease, transform 0.24s ease',
-            pointerEvents: activeTopic ? 'none' : 'auto',
-          }}
-        >
-          {topics.map((topic) => {
-            const isActive = topic.id === activeId
-            return (
-              <div
-                key={topic.id}
-                role="button"
-                tabIndex={0}
-                onClick={() => toggleTopic(topic.id)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    toggleTopic(topic.id)
-                  }
-                }}
-                className={`group relative rounded-3xl p-6 lg:p-8 flex flex-col min-h-[430px] cursor-pointer transition-all duration-500 overflow-hidden outline-none backdrop-blur-md ${
-                  isActive
-                    ? 'bg-[#0a0a0a]/80 border border-blue-500/50 shadow-[0_0_30px_rgba(59,130,246,0.15)]'
-                    : 'bg-[#050505]/60 border border-white/[0.05] hover:bg-[#0a0a0a]/80 hover:border-white/10'
-                }`}
-              >
-                {/* Hover gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity mix-blend-overlay"></div>
-                
-                <div className="w-full h-52 relative rounded-2xl overflow-hidden mb-6 border border-white/5 bg-white/[0.03]">
+          <div className="p-6 sm:p-10 lg:p-16 space-y-16">
+            {topics.map((topic, topicIdx) => (
+              <div key={topic.id} className="space-y-8">
+                {/* Section Title with Roman Numeral */}
+                <div className="text-center space-y-4">
+                  <div className="flex items-center justify-center gap-3">
+                    <span className="text-2xl font-bold text-amber-400/80 tracking-wide">
+                      Phần {romanNumerals[topicIdx]}.
+                    </span>
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+                      {topic.title}
+                    </h2>
+                  </div>
+                  {topic.short && (
+                    <p className="text-neutral-400 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
+                      {topic.short}
+                    </p>
+                  )}
+                </div>
+
+                {/* Full-Width Image */}
+                <div className="relative w-full h-[300px] sm:h-[400px] lg:h-[500px] rounded-2xl overflow-hidden border border-white/10 bg-black/50 shadow-xl">
                   <Image
-                    src={topic.heroImage}
+                    src={topic.fullImage || topic.heroImage}
                     alt={topic.title}
                     fill
-                    className="object-contain object-center p-3 opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                    className="object-contain p-6 sm:p-8"
                   />
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
-                </div>
-                
-                <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-400 group-hover:from-blue-200 group-hover:to-white transition-all duration-300 mb-3 tracking-tight leading-snug">{topic.title}</h3>
-                <p className="text-neutral-400 font-light leading-relaxed flex-1 group-hover:text-neutral-200 transition-colors duration-300">{topic.short}</p>
-                
-                <div className={`mt-6 text-sm font-medium tracking-wide uppercase flex items-center ${isActive ? 'text-blue-400' : 'text-neutral-500 group-hover:text-amber-400/80 transition-colors'}`}>
-                  {isActive ? 'Đang mở tab...' : 'Xem chi tiết →'}
-                </div>
-              </div>
-            )
-          })}
-        </div>
-
-        {/* ── Overlay Modal Backdrop ──────────────────── */}
-        <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 50,
-            background: 'rgba(0, 0, 0, 0.6)',
-            backdropFilter: 'blur(8px)',
-            pointerEvents: activeTopic ? 'auto' : 'none',
-            opacity: activeTopic ? 1 : 0,
-            transition: 'opacity 0.24s ease',
-          }}
-          onClick={() => setActiveId(null)}
-        />
-
-        {/* ── Modal Content Window ────────────────────── */}
-        <div
-          style={{
-            position: 'fixed',
-            top: '72px',
-            bottom: '24px',
-            left: 'min(24px, 2vw)',
-            right: 'min(24px, 2vw)',
-            maxWidth: '1500px',
-            margin: '0 auto',
-            zIndex: 55,
-            pointerEvents: activeTopic ? 'auto' : 'none',
-            opacity: activeTopic ? 1 : 0,
-            transform: activeTopic ? 'translateX(0) scale(1)' : activeId ? getOverlayEnterTransform(activeId) : 'translateY(12px) scale(0.98)',
-            transformOrigin: activeId ? getExpandOrigin(activeId) : 'center center',
-            transition: 'opacity 0.26s ease, transform 0.36s cubic-bezier(0.16, 1, 0.3, 1)',
-          }}
-          className="rounded-3xl bg-[#080808]/95 backdrop-blur-2xl border border-white/10 shadow-2xl flex flex-col overflow-hidden"
-        >
-            {activeTopic && (
-              <>
-                <div className="flex justify-between items-start gap-4 p-6 lg:p-8 border-b border-white/10 bg-white/5">
-                  <div>
-                    <div className="text-xs tracking-widest text-amber-400 uppercase font-semibold mb-2">
-                      Chi tiết chuyên sâu
-                    </div>
-                    <h3 className="text-3xl lg:text-4xl font-bold tracking-tight text-white">{activeTopic.title}</h3>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setActiveId(null)}
-                    className="flex-shrink-0 bg-white/10 hover:bg-white/20 text-white rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200 backdrop-blur-md"
-                  >
-                    Đóng x
-                  </button>
                 </div>
 
-                <div
-                  className="p-6 lg:p-10 overflow-y-auto grid grid-cols-1 lg:grid-cols-[380px_minmax(0,1fr)] gap-8 h-full"
-                >
-                  {/* Left Column - Image & Sources */}
-                  <div className="flex flex-col gap-6">
-                    <div className="relative w-full h-[280px] lg:h-[340px] rounded-2xl overflow-hidden border border-white/10 bg-black/50 shadow-inner">
-                      <Image
-                        src={activeTopic.fullImage || activeTopic.heroImage}
-                        alt={activeTopic.title}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-3">
-                      {activeTopic.sourceUrl && (
-                        <a
-                          href={activeTopic.sourceUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex justify-center items-center px-5 py-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-neutral-300 hover:text-white transition-all text-sm font-medium"
-                        >
-                          <svg className="w-4 h-4 mr-2 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
-                          {activeTopic.sourceLabel}
-                        </a>
-                      )}
-
-                      {activeTopic.youtubeUrl && activeTopic.youtubeLabel && (
-                        <a
-                          href={activeTopic.youtubeUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex justify-center items-center px-5 py-3 rounded-2xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-100 transition-all text-sm font-medium"
-                        >
-                          <svg className="w-5 h-5 mr-2 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-                          {activeTopic.youtubeLabel}
-                        </a>
-                      )}
-                    </div>
+                {/* Content Below Image */}
+                <div className="max-w-5xl mx-auto space-y-8">
+                  {/* Body Text */}
+                  <div className="space-y-4">
+                    {topic.body.map((paragraph, idx) => (
+                      <p key={idx} className="text-base sm:text-lg text-neutral-300 font-light leading-relaxed">
+                        {paragraph}
+                      </p>
+                    ))}
                   </div>
 
-                  {/* Right Column - Content text */}
-                  <div className="flex flex-col gap-6">
-                    <div className="rounded-3xl border border-white/5 bg-white/[0.02] p-8 backdrop-blur-md">
-                      <div className="space-y-4">
-                        {activeTopic.body.map((paragraph, idx) => (
-                          <p key={idx} className="text-base text-neutral-300 font-light leading-relaxed">
-                            {paragraph}
-                          </p>
+                  {/* Key Points & Examples Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Key Points */}
+                    <div className="rounded-2xl border border-blue-500/20 bg-blue-500/5 backdrop-blur-md p-6 sm:p-8 relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-[40px]" />
+                      <h4 className="text-lg sm:text-xl text-blue-400 mb-5 font-semibold tracking-tight relative z-10 flex items-center">
+                        <svg className="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        Ý chính trọng tâm
+                      </h4>
+                      <ul className="text-neutral-300 font-light leading-relaxed text-sm sm:text-base space-y-3 relative z-10 list-disc pl-5">
+                        {topic.keyPoints.map((point, idx) => (
+                          <li key={idx} className="pl-1">{point}</li>
                         ))}
-                      </div>
+                      </ul>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="rounded-3xl border border-blue-500/20 bg-blue-500/5 p-8 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 blur-[30px]" />
-                        <h4 className="text-lg text-blue-400 mb-4 font-semibold tracking-tight relative z-10 flex items-center">
-                          <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                          Ý chính trọng tâm
-                        </h4>
-                        <ul className="text-neutral-300 font-light leading-relaxed text-sm space-y-3 relative z-10 list-disc pl-4">
-                          {activeTopic.keyPoints.map((point, idx) => (
-                            <li key={idx} className="pl-1">{point}</li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <div className="rounded-3xl border border-amber-500/20 bg-amber-500/5 p-8 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 blur-[30px]" />
-                        <h4 className="text-lg text-amber-400 mb-4 font-semibold tracking-tight relative z-10 flex items-center">
-                          <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
-                          Ví dụ minh họa
-                        </h4>
-                        <ul className="text-neutral-300 font-light leading-relaxed text-sm space-y-3 relative z-10 list-disc pl-4">
-                          {(activeTopic.examples || []).map((example, idx) => (
-                            <li key={idx} className="pl-1">{example}</li>
-                          ))}
-                        </ul>
-                      </div>
+                    {/* Examples */}
+                    <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 backdrop-blur-md p-6 sm:p-8 relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 blur-[40px]" />
+                      <h4 className="text-lg sm:text-xl text-amber-400 mb-5 font-semibold tracking-tight relative z-10 flex items-center">
+                        <svg className="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                        Ví dụ minh họa
+                      </h4>
+                      <ul className="text-neutral-300 font-light leading-relaxed text-sm sm:text-base space-y-3 relative z-10 list-disc pl-5">
+                        {(topic.examples || []).map((example, idx) => (
+                          <li key={idx} className="pl-1">{example}</li>
+                        ))}
+                      </ul>
                     </div>
-
-                    {activeTopic.note && (
-                      <div className="mt-2 rounded-2xl border border-white/10 bg-white/5 p-5 flex items-start gap-4">
-                        <div className="text-sm font-light text-neutral-400 leading-relaxed italic border-l-2 border-amber-500/50 pl-4 py-1">
-                          {activeTopic.note}
-                        </div>
-                      </div>
-                    )}
                   </div>
+
+                  {/* Note */}
+                  {topic.note && (
+                    <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-md p-5">
+                      <div className="text-sm font-light text-neutral-400 leading-relaxed italic border-l-2 border-amber-500/50 pl-4 py-1">
+                        {topic.note}
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </>
-            )}
+
+                {/* Divider between sections (except last) */}
+                {topicIdx < topics.length - 1 && (
+                  <div className="pt-8">
+                    <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
+        </article>
       </div>
     </div>
   )
